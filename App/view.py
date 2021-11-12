@@ -31,6 +31,7 @@ import threading
 from App import controller
 from DISClib.ADT import stack
 assert config
+import time
 
 """
 La vista se encarga de la interacción con el usuario.
@@ -83,7 +84,11 @@ def optionThree(cont):
 
 
 def optionFour(cont, initialStation):
+    start_time = time.process_time()
     controller.minimumCostPaths(cont, initialStation)
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
+    print(elapsed_time_mseg)
 
 
 def optionFive(cont, destStation):
@@ -94,6 +99,7 @@ def optionFive(cont, destStation):
 
 
 def optionSix(cont, destStation):
+    start_time = time.process_time()
     path = controller.minimumCostPath(cont, destStation)
     if path is not None:
         pathlen = stack.size(path)
@@ -103,7 +109,9 @@ def optionSix(cont, destStation):
             print(stop)
     else:
         print('No hay camino')
-
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
+    print(elapsed_time_mseg)   
 
 def optionSeven(cont):
     maxvert, maxdeg = controller.servedRoutes(cont)
